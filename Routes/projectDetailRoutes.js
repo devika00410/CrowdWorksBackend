@@ -6,13 +6,14 @@ import {
   updateProjectDetail,
   deleteProjectDetail,
 } from "../Controllers/projectDetailController.js";
+import protect from "../Middleware/authMiddleware.js";
 
 const router = express.Router();
 
-router.post("/",      createProjectDetail);
-router.get("/",       getAllProjectDetails);
-router.get("/:id",    getProjectDetailById);
-router.put("/:id",    updateProjectDetail);
-router.delete("/:id", deleteProjectDetail);
+router.post("/", protect, createProjectDetail);
+router.get("/", getAllProjectDetails);
+router.get("/:id", getProjectDetailById);
+router.put("/:id", protect, updateProjectDetail);
+router.delete("/:id", protect, deleteProjectDetail);
 
 export default router;

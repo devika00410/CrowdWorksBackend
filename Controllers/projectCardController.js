@@ -70,6 +70,40 @@ export const getProjectCardById = async (req, res) => {
   }
 };
 
+export const createProjectCard = async (req, res) => {
+  try {
+    const { title, thumbnail, shortDescription, category, gallery } = req.body;
+
+    if (!title || !category) {
+      return res.status(400).json({
+        success: false,
+        data: null,
+        message: "Title and category are required",
+      });
+    }
+
+    const projectCard = await ProjectCard.create({
+      title,
+      thumbnail,
+      shortDescription,
+      category,
+      gallery,
+    });
+
+    res.status(201).json({
+      success: true,
+      data: projectCard,
+      message: "Project card created successfully",
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      data: null,
+      message: error.message,
+    });
+  }
+};
+
 // ─── DELETE PROJECT CARD ──────────────────────────────────────────────────────
 
 export const deleteProjectCard = async (req, res) => {

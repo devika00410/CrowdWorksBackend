@@ -7,14 +7,15 @@ import {
   updateDonationStatus,
   deleteDonationDetail,
 } from "../Controllers/donationDetailController.js";
+import protect from "../Middleware/authMiddleware.js";
 
 const router = express.Router();
 
-router.post("/", createDonationDetail);
-router.get("/", getAllDonationDetails);
+router.post("/", protect, createDonationDetail);
+router.get("/",  getAllDonationDetails);
 router.get("/campaign/:donationCardId", getDonationsByCampaign);
 router.get("/:id", getDonationDetailById);
-router.patch("/:id/status", updateDonationStatus);
-router.delete("/:id", deleteDonationDetail);
+router.patch("/:id/status", protect, updateDonationStatus);
+router.delete("/:id", protect, deleteDonationDetail);
 
 export default router;

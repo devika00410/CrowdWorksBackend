@@ -5,7 +5,7 @@ const blogDetailSchema = new mongoose.Schema({
 
   blogCardId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "BlogCard"
+    ref: "Blog"
   },
 
   content: String,

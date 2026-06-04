@@ -6,13 +6,14 @@ import {
   updateServiceDetail,
   deleteServiceDetail,
 } from "../Controllers/serviceDetailController.js";
+import protect from "../Middleware/authMiddleware.js";
 
 const router = express.Router();
 
-router.post("/",      createServiceDetail);
+router.post("/",  protect,    createServiceDetail);
 router.get("/",       getAllServiceDetails);
 router.get("/:id",    getServiceDetailById);
-router.put("/:id",    updateServiceDetail);
-router.delete("/:id", deleteServiceDetail);
+router.put("/:id",    protect, updateServiceDetail);
+router.delete("/:id", protect, deleteServiceDetail);
 
 export default router;

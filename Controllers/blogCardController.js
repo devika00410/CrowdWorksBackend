@@ -71,6 +71,39 @@ export const getBlogCardById = async (req,res)=>{
     }
 }
 
+export const createBlogCard = async (req, res) => {
+  try {
+    const { title, excerpt, coverImage, category, publishedAt } = req.body;
+
+    if (!title || !category) {
+      return res.status(400).json({
+        success: false,
+        message: "Title and category are required",
+      });
+    }
+
+    const blogCard = await BlogCard.create({
+      title,
+      excerpt,
+      coverImage,
+      category,
+      publishedAt: publishedAt || Date.now(),
+    });
+
+    res.status(201).json({
+      success: true,
+      data: blogCard,
+      message: "Blog card created successfully",
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Failed to create blog card",
+      error: error.message,
+    });
+  }
+};
+
 // Delete Blog Card
 
 export const deleteBlogCard = async (req,res)=>{

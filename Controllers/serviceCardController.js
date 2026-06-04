@@ -70,6 +70,42 @@ export const getServiceCardById = async (req, res) => {
   }
 };
 
+// ─── CREATE SERVICE CARD ─────────────────────────────────────────────────────
+
+export const createServiceCard = async (req, res) => {
+  try {
+    const { title, icon, shortDescription, isActive, order } = req.body;
+
+    if (!title) {
+      return res.status(400).json({
+        success: false,
+        data: null,
+        message: "Title is required",
+      });
+    }
+
+    const serviceCard = await ServiceCard.create({
+      title,
+      icon,
+      shortDescription,
+      isActive: isActive !== undefined ? isActive : true,
+      order: order || 0,
+    });
+
+    res.status(201).json({
+      success: true,
+      data: serviceCard,
+      message: "Service card created successfully",
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      data: null,
+      message: error.message,
+    });
+  }
+};
+
 // ─── DELETE SERVICE CARD ──────────────────────────────────────────────────────
 
 export const deleteServiceCard = async (req, res) => {

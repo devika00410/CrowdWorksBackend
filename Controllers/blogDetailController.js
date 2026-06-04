@@ -17,7 +17,7 @@ export const createBlogDetail = async (req,res)=>{
             // Create blog card and link to details
 
             const blogCard = await BlogCard.create({
-                title,excerpt,coverImage,category,publishedAt, detailid:blogDetail._id
+                title,excerpt,coverImage,category,publishedAt, detailId:blogDetail._id
             })
 
             // Link blog card to details
@@ -61,7 +61,7 @@ export const createBlogDetail = async (req,res)=>{
                     total,
                     page:Number(page),
                     limit:Number(limit),
-                    totalPages:Maths.ceil(total/Number(limit))
+                    totalPages:Math.ceil(total/Number(limit))
                 }
             })
         } catch(error){
