@@ -5,7 +5,7 @@ import {
   getServiceDetailById,
   updateServiceDetail,
   deleteServiceDetail,
-} from "../controllers/serviceDetailController";
+} from "../Controllers/serviceDetailController.js";
 
 const router = express.Router();
 

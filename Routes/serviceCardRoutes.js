@@ -3,7 +3,7 @@ import {
   getAllServiceCards,
   getServiceCardById,
   deleteServiceCard,
-} from "../controllers/serviceCardController";
+} from "../Controllers/serviceCardController.js";
 
 const router = express.Router();
 

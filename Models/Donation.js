@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const donationCampaignSchema = new mongoose.Schema(
+const donationCardSchema = new mongoose.Schema(
   {
     title: {
       type: String,

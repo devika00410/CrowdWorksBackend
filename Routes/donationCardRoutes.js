@@ -1,20 +1,22 @@
 import express from "express";
 import {
-  createDonationCampaign,
-  getAllDonationCampaigns,
-  getDonationCampaignById,
-  updateDonationCampaign,
-  updateRaisedAmount,
-  deleteDonationCampaign,
-} from "../controllers/donationCardController";
+  createDonation,
+  getAllDonations,
+  getDonationById,
+  updateDonation,
+  contributeToDonation,
+  toggleDonationActive,
+  deleteDonation,
+} from "../Controllers/donationCardController.js";
 
 const router = express.Router();
 
-router.post("/",                    createDonationCampaign);
-router.get("/",                     getAllDonationCampaigns);
-router.get("/:id",                  getDonationCampaignById);
-router.put("/:id",                  updateDonationCampaign);
-router.patch("/:id/raised-amount",  updateRaisedAmount);
-router.delete("/:id",               deleteDonationCampaign);
+router.post("/",                        createDonation);
+router.get("/",                         getAllDonations);
+router.get("/:id",                      getDonationById);
+router.put("/:id",                      updateDonation);
+router.patch("/:id/contribute",         contributeToDonation);
+router.patch("/:id/toggle-active",      toggleDonationActive);
+router.delete("/:id",                   deleteDonation);
 
 export default router;

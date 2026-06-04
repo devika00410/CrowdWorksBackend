@@ -1,5 +1,5 @@
-import ProjectCard from "../models/Project.js";
-import ProjectDetail from "../models/ProjectDetail.js";
+import ProjectCard from "../Models/Project.js";
+import ProjectDetail from "../Models/ProjectDetail.js";
 
 // ─── GET ALL PROJECT CARDS ────────────────────────────────────────────────────
 

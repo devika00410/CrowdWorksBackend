@@ -1,5 +1,5 @@
-import ServiceCard from "../models/Service.js";
-import ServiceDetail from "../models/ServiceDetail.js";
+import ServiceCard from "../Models/Service.js";
+import ServiceDetail from "../Models/ServiceDetail.js";
 
 // ─── GET ALL SERVICE CARDS ────────────────────────────────────────────────────
 

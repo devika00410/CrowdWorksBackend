@@ -3,7 +3,7 @@ import {
   getAllProjectCards,
   getProjectCardById,
   deleteProjectCard,
-} from "../controllers/projectCardController";
+} from "../Controllers/projectCardController.js";
 
 const router = express.Router();
 

@@ -1,4 +1,4 @@
-import BlogDetail from "../Models/BlogDetail.js";
+import BlogDetail from "../Models/BlogDetails.js";
 import BlogCard from "../Models/Blog.js";
 
 

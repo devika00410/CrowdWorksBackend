@@ -1,4 +1,4 @@
-import Contact from "../models/Contact.model.js";
+import Contact from "../Models/Contact.js";
 
 // ─── CREATE CONTACT ───────────────────────────────────────────────────────────
 
