@@ -26,12 +26,18 @@ const projectDetailSchema = new mongoose.Schema(
     },
 
     description: {
-      type: String,               
+      type: String,
       trim: true,
     },
 
-    sections: [sectionSchema],   
+    sections: [sectionSchema],
 
+    gallery: [
+      {
+        url: { type: String, trim: true },
+        caption: { type: String, trim: true },
+      }
+    ],
   },
   { timestamps: true }
 );

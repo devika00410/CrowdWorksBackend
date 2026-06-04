@@ -20,20 +20,17 @@ const adminSchema = new mongoose.Schema(
       type: String,
       required: [true, "Password is required"],
       minlength: [6, "Password must be at least 6 characters"],
-      select: false, // never returned in queries by default
+      select: false,
     },
   },
   { timestamps: true }
 );
 
-// Hash password before saving
-adminSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) return next();
+adminSchema.pre("save", async function () {
+  if (!this.isModified("password")) return;
   this.password = await bcrypt.hash(this.password, 10);
-  next();
 });
 
-// Compare entered password with hashed
 adminSchema.methods.matchPassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
 };

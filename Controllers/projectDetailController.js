@@ -12,6 +12,7 @@ export const createProjectDetail = async (req, res) => {
       category,
       description,
       sections,
+      gallery,
     } = req.body;
 
     // 1. Create ProjectDetail first
@@ -19,7 +20,8 @@ export const createProjectDetail = async (req, res) => {
       title,
       description,
       sections,
-      projectCardId: null,        // temp, will update after card is created
+      gallery,
+      projectCardId: null,
     });
 
     // 2. Create ProjectCard and link to ProjectDetail
@@ -28,6 +30,7 @@ export const createProjectDetail = async (req, res) => {
       thumbnail,
       shortDescription,
       category,
+      gallery,
       detailId: projectDetail._id,
     });
 
@@ -128,12 +131,13 @@ export const updateProjectDetail = async (req, res) => {
       category,
       description,
       sections,
+      gallery,
     } = req.body;
 
     // 1. Update ProjectDetail
     const projectDetail = await ProjectDetail.findByIdAndUpdate(
       id,
-      { title, description, sections },
+      { title, description, sections, gallery },
       { new: true, runValidators: true }
     );
 
@@ -149,7 +153,7 @@ export const updateProjectDetail = async (req, res) => {
     if (projectDetail.projectCardId) {
       await ProjectCard.findByIdAndUpdate(
         projectDetail.projectCardId,
-        { title, thumbnail, shortDescription, category },
+        { title, thumbnail, shortDescription, category, gallery },
         { new: true, runValidators: true }
       );
     }
@@ -184,7 +188,6 @@ export const deleteProjectDetail = async (req, res) => {
       });
     }
 
-    // Also delete the linked ProjectCard
     if (projectDetail.projectCardId) {
       await ProjectCard.findByIdAndDelete(projectDetail.projectCardId);
     }

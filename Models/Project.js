@@ -1,17 +1,11 @@
-
 import mongoose from "mongoose";
 
-
 const projectCardSchema = new mongoose.Schema({
-
   title: String,
-
   thumbnail: String,
-
   shortDescription: String,
-
   category: String,
-
+  gallery: [String],
   detailId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "ProjectDetail"
