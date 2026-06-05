@@ -104,6 +104,40 @@ export const createBlogCard = async (req, res) => {
   }
 };
 
+export const updateBlogCard = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const updatedBlogCard = await BlogCard.findByIdAndUpdate(
+      id,
+      req.body,
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
+
+    if (!updatedBlogCard) {
+      return res.status(404).json({
+        success: false,
+        message: "Blog card not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      data: updatedBlogCard,
+      message: "Blog card updated successfully",
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Failed to update blog card",
+      error: error.message,
+    });
+  }
+};
+
 // Delete Blog Card
 
 export const deleteBlogCard = async (req,res)=>{
