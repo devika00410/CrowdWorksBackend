@@ -6,52 +6,45 @@ import ProjectCard from "../Models/Project.js";
 export const createProjectDetail = async (req, res) => {
   try {
     const {
+      projectCardId,
       title,
-      thumbnail,
-      shortDescription,
-      category,
       description,
       sections,
       gallery,
     } = req.body;
 
-    // 1. Create ProjectDetail first
+    const projectCard = await ProjectCard.findById(projectCardId);
+
+    if (!projectCard) {
+      return res.status(404).json({
+        success: false,
+        message: "Project card not found"
+      });
+    }
+
     const projectDetail = await ProjectDetail.create({
       title,
       description,
       sections,
       gallery,
-      projectCardId: null,
+      projectCardId,
     });
 
-    // 2. Create ProjectCard and link to ProjectDetail
-    const projectCard = await ProjectCard.create({
-      title,
-      thumbnail,
-      shortDescription,
-      category,
-      gallery,
-      detailId: projectDetail._id,
-    });
-
-    // 3. Link ProjectCard back to ProjectDetail
-    projectDetail.projectCardId = projectCard._id;
-    await projectDetail.save();
+    projectCard.detailId = projectDetail._id;
+    await projectCard.save();
 
     res.status(201).json({
       success: true,
-      data: { projectCard, projectDetail },
-      message: "Project created successfully",
+      data: projectDetail,
+      message: "Project detail created successfully"
     });
   } catch (error) {
     res.status(500).json({
       success: false,
-      data: null,
-      message: error.message,
+      message: error.message
     });
   }
 };
-
 // ─── GET ALL PROJECT DETAILS ──────────────────────────────────────────────────
 
 export const getAllProjectDetails = async (req, res) => {

@@ -15,7 +15,7 @@ const projectDetailSchema = new mongoose.Schema(
   {
     projectCardId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "ProjectCard",
+      ref: "Project",
       required: [true, "Project card reference is required"],
     },
 

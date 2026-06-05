@@ -3,10 +3,10 @@ import mongoose from "mongoose";
 
 const serviceDetailSchema = new mongoose.Schema({
 
-  serviceCardId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "ServiceCard"
-  },
+ serviceCardId: {
+  type: mongoose.Schema.Types.ObjectId,
+  ref: "Service"
+},
 
   bannerImage: String,
 

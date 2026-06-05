@@ -70,6 +70,8 @@ export const getProjectCardById = async (req, res) => {
   }
 };
 
+
+
 export const createProjectCard = async (req, res) => {
   try {
     const { title, thumbnail, shortDescription, category, gallery } = req.body;
@@ -103,7 +105,40 @@ export const createProjectCard = async (req, res) => {
     });
   }
 };
+export const updateProjectCard = async (req, res) => {
+  try {
+    const { id } = req.params;
 
+    const updatedProject = await ProjectCard.findByIdAndUpdate(
+      id,
+      req.body,
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
+
+    if (!updatedProject) {
+      return res.status(404).json({
+        success: false,
+        data: null,
+        message: "Project card not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      data: updatedProject,
+      message: "Project card updated successfully",
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      data: null,
+      message: error.message,
+    });
+  }
+};
 // ─── DELETE PROJECT CARD ──────────────────────────────────────────────────────
 
 export const deleteProjectCard = async (req, res) => {

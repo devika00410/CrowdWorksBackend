@@ -106,6 +106,40 @@ export const createServiceCard = async (req, res) => {
   }
 };
 
+export const updateServiceCard = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const serviceCard = await ServiceCard.findByIdAndUpdate(
+      id,
+      req.body,
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
+
+    if (!serviceCard) {
+      return res.status(404).json({
+        success: false,
+        data: null,
+        message: "Service card not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      data: serviceCard,
+      message: "Service card updated successfully",
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      data: null,
+      message: error.message,
+    });
+  }
+};
 // ─── DELETE SERVICE CARD ──────────────────────────────────────────────────────
 
 export const deleteServiceCard = async (req, res) => {
